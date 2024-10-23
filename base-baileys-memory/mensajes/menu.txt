@@ -1,0 +1,9 @@
+Por favor seleccione una de las siguientes opciones: 
+
+Opcion *1* - Catalogo
+
+Opcion *2* - Horario de Atencion
+
+Opcion *3* - Consultas
+
+Menu/Salir
