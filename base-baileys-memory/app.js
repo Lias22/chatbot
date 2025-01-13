@@ -10,6 +10,9 @@ const fs = require("fs")
 const menuPath = path.join(__dirname, "mensajes", "menu.txt")
 const menu = fs.readFileSync(menuPath, "utf8")
 
+
+
+
 // Definir el flow principal
 const flowPrincipal = addKeyword(EVENTS.WELCOME)
     .addAnswer('🙌 Hola bienvenido NewReset!')
@@ -40,7 +43,17 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
 
         
 
-
+    const flowVolver = addKeyword(EVENTS.ACTION)
+        .addAnswer('🙌 Hola bienvenido NewReset!')
+        .addAnswer([
+            
+                'Te comparto los siguientes links de interés sobre el proyecto:',
+                '👉 *Menu* para ver el menu',
+                '👉 *Stock* para ver la lista de Stock disponible',
+                '👉 *web* para ver la web'
+        
+            ])
+        
 
 
 
@@ -66,7 +79,7 @@ const menuFlow = addKeyword(["Menu", "menu"])
         { capture: true },
         async (ctx, { gotoFlow, flowDynamic }) => {
             // Manejo de respuestas válidas
-            if (["1", "2", "3"].includes(ctx.body)) {
+            if (["1", "2", "3", "4"].includes(ctx.body)) {
                 switch (ctx.body) {
                     case "1":
                         return gotoFlow(flowCatalogo);
@@ -74,6 +87,8 @@ const menuFlow = addKeyword(["Menu", "menu"])
                         return gotoFlow(flowHorario);
                     case "3":
                         return gotoFlow(flowConsultas);
+                    case "4":
+                        return gotoFlow(flowVolver)
                 }
             } else {
                 // Comportamiento de fallback cuando la opción no es válida
@@ -88,7 +103,7 @@ const menuFlow = addKeyword(["Menu", "menu"])
 const main = async () => {
     const adapterDB = new MockAdapter(
     );
-    const adapterFlow = createFlow([flowPrincipal, flowWelcome, menuFlow, flowCatalogo, flowHorario, flowConsultas, flowWeb  ]); // Flujos principales
+    const adapterFlow = createFlow([flowPrincipal, flowWelcome, menuFlow, flowCatalogo, flowHorario, flowConsultas, flowWeb, flowVolver  ]); // Flujos principales
     const adapterProvider = createProvider(BaileysProvider);
 
     createBot({

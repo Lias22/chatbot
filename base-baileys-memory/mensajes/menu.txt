@@ -6,4 +6,4 @@ Opcion *2* - Horario de Atencion
 
 Opcion *3* - Consultas
 
-Menu/Salir
+Opcion *4* - Volver
